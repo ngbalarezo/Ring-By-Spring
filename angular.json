@@ -3,7 +3,10 @@
   "version": 1,
   "cli": {
     "packageManager": "bun",
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -91,6 +94,15 @@
               "src/frontend/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/frontend/**/*.ts",
+              "src/frontend/**/*.html"
+            ]
           }
         }
       }
