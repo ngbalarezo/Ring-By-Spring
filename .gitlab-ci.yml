@@ -19,7 +19,7 @@
 stages:          # List of stages for jobs, and their order of execution
   - build-test-image
   - test
-  #- cleanup
+  - cleanup
 #  - deploy
 
 variables:
