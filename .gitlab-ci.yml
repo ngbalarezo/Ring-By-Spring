@@ -46,18 +46,18 @@ test-image:
       --target test-build-stage
     - echo "Image complete."
 
-build-angular:       # This job runs in the build stage, which runs first.
-  stage: build
-  image:
-    name: $BASE_TEST_IMAGE
-    entrypoint: [""]
-  retry: 2
-  script:
-    # - echo "Building Image"
-    - npm install
-    - npm run build
-  artifacts:
-    - dist/
+# build-angular:       # This job runs in the build stage, which runs first.
+#   stage: build
+#   image:
+#     name: $BASE_TEST_IMAGE
+#     entrypoint: [""]
+#   retry: 2
+#   script:
+#     # - echo "Building Image"
+#     - npm install
+#     - npm run build
+#   artifacts:
+#     - dist/
 
 # unit-test-job:   # This job runs in the test stage.
 #   stage: test    # It only starts when the job in the build stage completes successfully.
