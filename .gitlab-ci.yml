@@ -1,0 +1,121 @@
+# This file is a template, and might need editing before it works on your project.
+# This is a sample GitLab CI/CD configuration file that should run without any modifications.
+# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
+# it uses echo commands to simulate the pipeline execution.
+#
+# A pipeline is composed of independent jobs that run scripts, grouped into stages.
+# Stages run in sequential order, but jobs within stages run in parallel.
+#
+# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
+#
+# You can copy and paste this template into a new `.gitlab-ci.yml` file.
+# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
+#
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
+
+stages:          # List of stages for jobs, and their order of execution
+  - build-test-image
+  - test
+  #- cleanup
+#  - deploy
+
+variables:
+  IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+  DOCKER_HOST: tcp://localhost:2375
+  KANIKO_IMAGE: gcr.io/kaniko-project/executor:v1.21.1-debug
+  BASE_TEST_IMAGE: registry.franciscan.edu/spr24-web-groups/image-base:base-test
+
+test-image:
+  stage: build-test-image
+  image:
+    name: $KANIKO_IMAGE
+    entrypoint: [""]
+
+  retry: 2
+
+  script:
+    # - echo "Building Image"
+    - /kaniko/executor
+      --cache=true --cache-copy-layers=true --cache-ttl=7d
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${IMAGE_NAME}-test"
+      --target test-build-stage
+    - echo "Image complete."
+
+build-angular:       # This job runs in the build stage, which runs first.
+  stage: build
+  image:
+    name: $BASE_TEST_IMAGE
+    entrypoint: [""]
+  retry: 2
+  script:
+    # - echo "Building Image"
+    - npm install
+    - npm run build
+  artifacts:
+    - dist/
+
+# unit-test-job:   # This job runs in the test stage.
+#   stage: test    # It only starts when the job in the build stage completes successfully.
+
+#   variables:
+#     NODE_ENV: ci
+#     DB_USER: test_u_$CI_COMMIT_SHORT_SHA
+#     DB_PASSWORD: $DB_PASS
+#     DB_DATABASE: test_$CI_COMMIT_SHORT_SHA
+#   image: ${IMAGE_NAME}-test
+#   script:
+#     - which mysql
+#     - which mariadb
+#     - cd /app && npm run containerTest
+#     # TODO: Set up code coverage.
+#     # - echo "Code coverage is 90%"
+
+angular-test:   # This job runs the angular tests.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+
+  variables:
+    NODE_ENV: ci
+    DB_USER: test_u_$CI_COMMIT_SHORT_SHA
+    DB_PASSWORD: $DB_PASS
+    DB_DATABASE: test_$CI_COMMIT_SHORT_SHA
+  image: ${IMAGE_NAME}-test
+  script:
+    - cd /app && ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox
+    # TODO: Set up code coverage.
+    # - echo "Code coverage is 90%"
+
+lint-test-job:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+
+  image: ${IMAGE_NAME}-test
+  script:
+    - echo "Linting code..."
+    - cd /app && npm run lint
+    - echo "No lint issues found."
+
+delete-test-image:
+  before_script:
+    - curl --fail --show-error --location "https://github.com/genuinetools/reg/releases/download/v$REG_VERSION/reg-linux-amd64" --output ./reg
+    - echo "$REG_SHA256  ./reg" | sha256sum -c -
+    - chmod a+x ./reg
+  image: curlimages/curl:7.86.0
+  script:
+    - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}-test
+    - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}
+  variables:
+    REG_SHA256: ade837fc5224acd8c34732bf54a94f579b47851cc6a7fd5899a98386b782e228
+    REG_VERSION: 0.16.1
+  stage: cleanup
+
+# deploy-job:      # This job runs in the deploy stage.
+#   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+#   environment: production
+#   script:
+#     - echo "Deploying application..."
+#     - echo "Not really happening yet!"
+#     - echo "Application successfully deployed."
