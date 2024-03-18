@@ -39,7 +39,7 @@ test-image:
   script:
     # - echo "Building Image"
     - /kaniko/executor
-      --cache=true --cache-copy-layers=true --cache-ttl=7d
+      --cache=true --cache-copy-layers=true --cache-ttl=128h
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${IMAGE_NAME}-test"
