@@ -1,1 +1,56 @@
-<p>create-user works!</p>
+<h1>Add User</h1>
+<form [formGroup]="userForm" (submit)="saveUser()">
+  <p>
+    <label for="userID">ID:</label>
+    <input id="userID" required type="number" formControlName="userID">
+  </p>
+
+  <p>
+    <label for="firstName">First Name:</label>
+    <input id="firstName" required type="string" formControlName="firstName">
+  </p>
+
+  <p>
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" required type="string" formControlName="lastName">
+  </p>
+
+  <p>
+    <label for="dob">Date of Birth:</label>
+    <input id="dob" required type="date" formControlName="dob">
+  </p>
+
+  <p>
+    <label for="gender">Gender:</label>
+    <input id="gender" required type="string" formControlName="gender">
+  </p>
+
+  <p>
+    <label for="description">Description:</label>
+    <input id="description" required type="string" formControlName="description">
+  </p>
+
+  <p>
+    <label for="profilePicture">Profile Picture:</label>
+    <input id="profilePicture" required type="image" formControlName="image">
+  </p>
+
+  <p>
+    <label for="interest1">Interest 1:</label>
+    <input id="interest1" required type="string" formControlName="interest1">
+  </p>
+
+  <p>
+    <label for="interest2">Interest 2:</label>
+    <input id="interest2" required type="string" formControlName="interest2">
+  </p>
+
+  <p>
+    <label for="interest3">Interest 3:</label>
+    <input id="interest3" required type="string" formControlName="interest3">
+  </p>
+
+  <p>
+    <button type="submit"  [disabled]="!playedForm.valid">Save</button>
+  </p>
+</form>
