@@ -2,7 +2,7 @@
 <form [formGroup]="userForm" (submit)="saveUser()">
   <p>
     <label for="userID">ID:</label>
-    <input id="userID" required type="number" formControlName="userID">
+    <input id="userID" required type="string" formControlName="userID">
   </p>
 
   <p>
@@ -17,7 +17,7 @@
 
   <p>
     <label for="dob">Date of Birth:</label>
-    <input id="dob" required type="date" formControlName="dob">
+    <input id="dob" required type="string" formControlName="dob">
   </p>
 
   <p>
@@ -32,7 +32,7 @@
 
   <p>
     <label for="profilePicture">Profile Picture:</label>
-    <input id="profilePicture" required type="image" formControlName="image">
+    <input id="profilePicture" required type="string" formControlName="image">
   </p>
 
   <p>
