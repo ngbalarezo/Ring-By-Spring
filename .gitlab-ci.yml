@@ -95,8 +95,26 @@ lint-test-job:   # This job also runs in the test stage.
   image: ${IMAGE_NAME}-test
   script:
     - echo "Linting code..."
-    - cd /app && npm run lint
+    - cd /app && bun run lint
     - echo "No lint issues found."
+
+prisma-test-job:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+  environment:
+    name: integration
+  services:
+    - mariadb:latest
+  variables:
+    MYSQL_DATABASE: test_${CI_PROJECT_NAME}_database
+    MYSQL_ROOT_PASSWORD: root_password
+    DATABASE_URL: mysql://test_${CI_PROJECT_NAME}_user:password@mariadb:3306/test_${CI_PROJECT_NAME}_database
+    MYSQL_USER: test_${CI_PROJECT_NAME}_user
+    MYSQL_PASSWORD: password
+  image: ${IMAGE_NAME}-test
+  script:
+    - echo "Running Prisma migrate..."
+    - cd /app && bun prisma migrate reset -f
+    - echo "Done."
 
 # delete-test-image:
 #   before_script:
