@@ -22,8 +22,8 @@ stages:          # List of stages for jobs, and their order of execution
   - cleanup
 #  - deploy
 
-services:
-  - mariadb:latest
+# services:
+#   - mariadb:latest
 
 variables:
   IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
@@ -35,16 +35,26 @@ variables:
   MARIADB_USER: test_${CI_PROJECT_NAME}_user
   MARIADB_PASSWORD: password
 
-
 stop_environment:
-  stage: test
+  stage: cleanup
+  allow_failure: true
   script:
     - echo "Stopping environment"
   environment:
     name: review/$CI_COMMIT_REF_SLUG
-    action: stop
+    action: start
 
-test-image:
+start_environment:
+  stage: build-test-image
+  script:
+    - echo "Starting environment"
+  services:
+    - mariadb:latest
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: start
+
+build-test-image:
   stage: build-test-image
   image:
     name: $KANIKO_IMAGE
@@ -113,6 +123,8 @@ lint-test-job:   # This job also runs in the test stage.
 
 prisma-test-job:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
+  services:
+    - mariadb:latest
   environment:
     name: review/$CI_COMMIT_REF_SLUG
   variables:
@@ -123,19 +135,19 @@ prisma-test-job:   # This job also runs in the test stage.
     - cd /app && bun prisma migrate reset -f
     - echo "Done."
 
-# delete-test-image:
-#   before_script:
-#     - curl --fail --show-error --location "https://github.com/genuinetools/reg/releases/download/v$REG_VERSION/reg-linux-amd64" --output ./reg
-#     - echo "$REG_SHA256  ./reg" | sha256sum -c -
-#     - chmod a+x ./reg
-#   image: curlimages/curl:7.86.0
-#   script:
-#     - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}-test
-#     - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}
-#   variables:
-#     REG_SHA256: ade837fc5224acd8c34732bf54a94f579b47851cc6a7fd5899a98386b782e228
-#     REG_VERSION: 0.16.1
-#   stage: cleanup
+#  delete-test-image:
+#    stage: cleanup
+#    before_script:
+#      - curl --fail --show-error --location "https://github.com/genuinetools/reg/releases/download/v$REG_VERSION/reg-linux-amd64" --output ./reg
+#      - echo "$REG_SHA256  ./reg" | sha256sum -c -
+#      - chmod a+x ./reg
+#    image: curlimages/curl:7.86.0
+#    script:
+#      - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}-test
+#      - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}
+#    variables:
+#      REG_SHA256: ade837fc5224acd8c34732bf54a94f579b47851cc6a7fd5899a98386b782e228
+#      REG_VERSION: 0.16.1
 
 # deploy-job:      # This job runs in the deploy stage.
 #   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
@@ -145,10 +157,3 @@ prisma-test-job:   # This job also runs in the test stage.
 #     - echo "Not really happening yet!"
 #     - echo "Application successfully deployed."
 
-stop_environment:
-  stage: test
-  script:
-    - echo "Stopping environment"
-  environment:
-    name: review/$CI_COMMIT_REF_SLUG
-    action: stop
