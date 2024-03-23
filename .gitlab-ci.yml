@@ -19,14 +19,30 @@
 stages:          # List of stages for jobs, and their order of execution
   - build-test-image
   - test
-  # - cleanup
+  - cleanup
 #  - deploy
+
+services:
+  - mariadb:latest
 
 variables:
   IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   DOCKER_HOST: tcp://localhost:2375
   KANIKO_IMAGE: gcr.io/kaniko-project/executor:v1.21.1-debug
   BASE_TEST_IMAGE: registry.franciscan.edu/spr24-web-groups/image-base:base-test
+  MARIADB_DATABASE: test_${CI_PROJECT_NAME}_database
+  MYSQL_ROOT_PASSWORD: root_password
+  MARIADB_USER: test_${CI_PROJECT_NAME}_user
+  MARIADB_PASSWORD: password
+
+
+stop_environment:
+  stage: test
+  script:
+    - echo "Stopping environment"
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
 
 test-image:
   stage: build-test-image
@@ -80,9 +96,6 @@ angular-test:   # This job runs the angular tests.
 
   variables:
     NODE_ENV: ci
-    DB_USER: test_u_$CI_COMMIT_SHORT_SHA
-    DB_PASSWORD: $DB_PASS
-    DB_DATABASE: test_$CI_COMMIT_SHORT_SHA
   image: ${IMAGE_NAME}-test
   script:
     - cd /app && ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox
@@ -101,15 +114,9 @@ lint-test-job:   # This job also runs in the test stage.
 prisma-test-job:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
   environment:
-    name: integration
-  services:
-    - mariadb:latest
+    name: review/$CI_COMMIT_REF_SLUG
   variables:
-    MYSQL_DATABASE: test_${CI_PROJECT_NAME}_database
-    MYSQL_ROOT_PASSWORD: root_password
-    DATABASE_URL: mysql://test_${CI_PROJECT_NAME}_user:password@mariadb:3306/test_${CI_PROJECT_NAME}_database
-    MYSQL_USER: test_${CI_PROJECT_NAME}_user
-    MYSQL_PASSWORD: password
+    DATABASE_URL: mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@mariadb:3306/${MARIADB_DATABASE}
   image: ${IMAGE_NAME}-test
   script:
     - echo "Running Prisma migrate..."
@@ -137,3 +144,11 @@ prisma-test-job:   # This job also runs in the test stage.
 #     - echo "Deploying application..."
 #     - echo "Not really happening yet!"
 #     - echo "Application successfully deployed."
+
+stop_environment:
+  stage: test
+  script:
+    - echo "Stopping environment"
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
