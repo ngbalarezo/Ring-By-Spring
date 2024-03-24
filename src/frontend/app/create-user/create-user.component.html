@@ -1,56 +1,53 @@
 <h1>Add User</h1>
-<form [formGroup]="userForm" (submit)="saveUser()">
-  <p>
-    <label for="userID">ID:</label>
-    <input id="userID" required type="string" formControlName="userID">
-  </p>
+<div>
+  <label for="userID">ID:</label>
+  <input id="userID" [(ngModel)]="user.userID" placeholder="userID">
+</div>
 
-  <p>
-    <label for="firstName">First Name:</label>
-    <input id="firstName" required type="string" formControlName="firstName">
-  </p>
+<div>
+  <label for="firstName">First Name:</label>
+  <input id="firstName" [(ngModel)]="user.firstName" placeholder="firstName">
+</div>
 
-  <p>
-    <label for="lastName">Last Name:</label>
-    <input id="lastName" required type="string" formControlName="lastName">
-  </p>
+<div>
+  <label for="lastName">Last Name:</label>
+  <input id="lastName" [(ngModel)]="user.lastName" placeholder="lastName">
+</div>
 
-  <p>
-    <label for="dob">Date of Birth:</label>
-    <input id="dob" required type="string" formControlName="dob">
-  </p>
+<div>
+  <label for="dob">Date of Birth:</label>
+  <input id="dob" [(ngModel)]="user.dob" placeholder="dob">
+</div>
 
-  <p>
-    <label for="gender">Gender:</label>
-    <input id="gender" required type="string" formControlName="gender">
-  </p>
+<div>
+  <label for="gender">Gender:</label>
+  <input id="gender" [(ngModel)]="user.gender" placeholder="gender">
+</div>
 
-  <p>
-    <label for="description">Description:</label>
-    <input id="description" required type="string" formControlName="description">
-  </p>
+<div>
+  <label for="description">Description:</label>
+  <input id="description" [(ngModel)]="user.description" placeholder="description">
+</div>
 
-  <p>
-    <label for="profilePicture">Profile Picture:</label>
-    <input id="profilePicture" required type="string" formControlName="image">
-  </p>
+<div>
+  <label for="profilePicture">Profile Picture:</label>
+  <input id="profilePicture" [(ngModel)]="user.profilePicture" placeholder="profilePicture">
+</div>
 
-  <p>
-    <label for="interest1">Interest 1:</label>
-    <input id="interest1" required type="string" formControlName="interest1">
-  </p>
+<div>
+  <label for="interest1">Interest 1:</label>
+  <input id="interest1" [(ngModel)]="user.interest1" placeholder="interest1">
+</div>
 
-  <p>
-    <label for="interest2">Interest 2:</label>
-    <input id="interest2" required type="string" formControlName="interest2">
-  </p>
+<div>
+  <label for="interest2">Interest 2:</label>
+  <input id="interest2" [(ngModel)]="user.interest2" placeholder="interest2">
+</div>
 
-  <p>
-    <label for="interest3">Interest 3:</label>
-    <input id="interest3" required type="string" formControlName="interest3">
-  </p>
-
-  <p>
-    <button type="submit"  [disabled]="!playedForm.valid">Save</button>
-  </p>
-</form>
+<div>
+  <label for="interest3">Interest 3:</label>
+  <input id="interest3" [(ngModel)]="user.interest3" placeholder="interest3">
+</div>
+<div>
+  <input type="button" value="Add" (click)="save()">
+</div>

@@ -1,74 +1,57 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-//import { CreatePosts } from '../create-posts/create-posts.component';
+import { FormsModule } from '@angular/forms';
 import { User } from "../../../models/user";
-
+import { UserService } from '../services/user.service';
+//import { CreatePosts } from '../create-posts/create-posts.component';
 
 @Component({
   selector: 'ng-create-user',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.css'
 })
 
 export class CreateUserComponent {
-  userForm = new FormGroup({
-    userID: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    dob: new FormControl(new Date().toISOString().slice(0, 10), Validators.required),
-    gender: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-    profilePicture: new FormControl('', Validators.required),
-    interest1: new FormControl('', Validators.required),
-    interest2: new FormControl('', Validators.required),
-    interest3: new FormControl('', Validators.required)
-  });
 
-  saveUser() {
-    let userID = this.userForm.value.userID;
-    if (!userID) {
-      throw "UserID is required!";
-    }
-    let firstName = this.userForm.value.firstName;
-    if (!firstName) {
-      throw "First name is required!";
-    }
-    let lastName = this.userForm.value.lastName;
-    if (!lastName) {
-      throw "Last name is required!";
-    }
-    let dob = this.userForm.value.dob;
-    if (!dob) {
-      throw "Date of birth is required!";
-    }
-    let gender = this.userForm.value.gender;
-    if (!gender) {
-      throw "Gender is required!";
-    }
-    let description = this.userForm.value.description;
-    if (!description) {
-      throw "Description is required!";
-    }
-    let profilePicture = this.userForm.value.profilePicture;
-    if (!profilePicture) {
-      throw "Profile picture is required!";
-    }
-    let interest1 = this.userForm.value.interest1;
-    if (!interest1) {
-      throw "Interest 1 is required!";
-    }
-    let interest2 = this.userForm.value.interest2;
-    if (!interest2) {
-      throw "Interest 2 is required!";
-    }
-    let interest3 = this.userForm.value.interest3;
-    if (!interest3) {
-      throw "Interest 3 is required!";
-    }
-    let user: User = {userID: userID!, firstName: firstName!, lastName: lastName!, dob: dob!, gender: gender!, description: description!, profilePicture: profilePicture!, interest1: interest1, interest2: interest2, interest3: interest3};
+  constructor(private userService: UserService, private router: Router) {}
 
-    console.log("Save");
+  firstName: string = '';
+  lastName: string = '';
+  dob: string = '';
+  gender: string = '';
+  description: string = '';
+  profilePicture: string = '';
+  interest1: string = '';
+  interest2: string = '';
+  interest3: string = '';
+
+  save(): void {
+    const toSave: User = {
+      firstName: this.lastName,
+      lastName: this.lastName,
+      dob: this.dob,
+      gender: this.gender,
+    }
+    if (this.description) {
+      toSave.description = this.description;
+    }
+    if (this.profilePicture) {
+      toSave.profilePicture = this.profilePicture;
+    }
+    if (this.interest1) {
+      toSave.interest1 = this.interest1;
+    }
+    if (this.interest2) {
+      toSave.interest2 = this.interest2;
+    }
+    if (this.interest3) {
+      toSave.interest3 = this.interest3;
+    }
+    this.userService.createUser(toSave).subscribe(user => {
+      console.log('Saved ',user,', returning home.');
+      this.router.navigate(['/']);
+    });
   }
 }
