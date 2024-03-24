@@ -35,26 +35,26 @@ variables:
   MARIADB_USER: test_${CI_PROJECT_NAME}_user
   MARIADB_PASSWORD: password
 
-stop_environment:
-  stage: .post
-  rules:
-      - when: always
-  script:
-    - echo "Stopping environment"
-  environment:
-    name: review/$CI_COMMIT_REF_SLUG
-    action: stop
+# stop_environment:
+#   stage: .post
+#   rules:
+#       - when: always
+#   script:
+#     - echo "Stopping environment"
+#   environment:
+#     name: review/$CI_COMMIT_REF_SLUG
+#     action: stop
 
-start_environment:
-  stage: build-test-image
-  script:
-    - echo "Starting environment"
-  services:
-    - mariadb:latest
-  environment:
-    name: review/$CI_COMMIT_REF_SLUG
-    action: start
-    auto_stop_in: 2 hours
+# start_environment:
+#   stage: build-test-image
+#   script:
+#     - echo "Starting environment"
+#   services:
+#     - mariadb:latest
+#   environment:
+#     name: review/$CI_COMMIT_REF_SLUG
+#     action: start
+#     auto_stop_in: 2 hours
 
 build-test-image:
   stage: build-test-image
@@ -125,8 +125,8 @@ prisma-test-job:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
   services:
     - mariadb:latest
-  environment:
-    name: review/$CI_COMMIT_REF_SLUG
+  # environment:
+  #   name: review/$CI_COMMIT_REF_SLUG
   retry: 2
   variables:
     DATABASE_URL: mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@mariadb:3306/${MARIADB_DATABASE}
