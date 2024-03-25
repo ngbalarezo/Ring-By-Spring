@@ -6,7 +6,7 @@ export interface User {
   firstName: string;
   lastName: string;
   //user's date of birth
-  dob: string;
+  dob: Date;
   //user's gender
   gender: string;
   //user can leave a bio/description of themselves

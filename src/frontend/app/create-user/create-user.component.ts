@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from "../../../models/user";
 import { UserService } from '../services/user.service';
 //import { CreatePosts } from '../create-posts/create-posts.component';
@@ -8,7 +9,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'ng-create-user',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.css'
 })
@@ -27,11 +28,24 @@ export class CreateUserComponent {
   interest2: string = '';
   interest3: string = '';
 
+  /*
+  const validDOB = this.dob;
+  validateDate(validDOB) {
+    const regex = /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/;
+    if (regex.test(dob) == true){
+      return true;
+    }
+    else if (regex.test(dob) == false) {
+      return false;
+    }
+  }
+  */
+
   save(): void {
     const toSave: User = {
       firstName: this.lastName,
       lastName: this.lastName,
-      dob: this.dob,
+      dob: new Date(this.dob),
       gender: this.gender,
     }
     if (this.description) {

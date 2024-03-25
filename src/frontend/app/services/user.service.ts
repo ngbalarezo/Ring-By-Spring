@@ -12,7 +12,7 @@ export class UserService {
     firstName: 'Kyle',
     lastName: 'Crocodile',
     gender: 'Male',
-    dob: '01/20/2005',
+    dob: new Date('03/25/1900'),
   }];
   nextId: number = 1;
   constructor() { }
