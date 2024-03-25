@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../../models/user';
 import { Observable, of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +8,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class UserService {
 
   // TODO Connect to the webserver and delete this.
-  users: User[] = [
-    {firstName: 'Kyle', lastName: 'Crocodile', gender: 'Male', dob: new Date('03/25/1900')},
-    {firstName: 'Jim', lastName: 'Flim', gender: 'Male', dob: new Date('07/53/1943')}
-  ];
+  users: User[] = [{
+    firstName: 'Kyle',
+    lastName: 'Crocodile',
+    gender: 'Male',
+    dob: new Date('03/25/1900'),
+  }];
   nextId: number = 1;
   constructor() { }
 
