@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../services/posts.service';
 import { Posts } from '../../../models/posts';
-import { P } from 'elysia/dist/index-59i0HOI0';
 
 @Component({
   selector: 'ng-create-posts',
