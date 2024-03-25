@@ -10,8 +10,10 @@
 </div>
 
 <div>
-  <label for="dob">Date of Birth: </label>
-  <input id="dob" [(ngModel)]="dob">
+  <input matInput [matDatepicker]="picker">
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
 </div>
 
 <div>
