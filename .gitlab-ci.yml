@@ -19,27 +19,53 @@
 stages:          # List of stages for jobs, and their order of execution
   - build-test-image
   - test
-  # - cleanup
 #  - deploy
 
+# services:
+#   - mariadb:latest
+
 variables:
-  IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+  IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   DOCKER_HOST: tcp://localhost:2375
   KANIKO_IMAGE: gcr.io/kaniko-project/executor:v1.21.1-debug
   BASE_TEST_IMAGE: registry.franciscan.edu/spr24-web-groups/image-base:base-test
+  REMOVER_IMAGE: registry.franciscan.edu/rzaleski/image-remover:latest
+  MARIADB_DATABASE: test_${CI_PROJECT_NAME}_database
+  MYSQL_ROOT_PASSWORD: root_password
+  MARIADB_USER: test_${CI_PROJECT_NAME}_user
+  MARIADB_PASSWORD: password
 
-test-image:
+# stop_environment:
+#   stage: .post
+#   rules:
+#       - when: always
+#   script:
+#     - echo "Stopping environment"
+#   environment:
+#     name: review/$CI_COMMIT_REF_SLUG
+#     action: stop
+
+# start_environment:
+#   stage: build-test-image
+#   script:
+#     - echo "Starting environment"
+#   services:
+#     - mariadb:latest
+#   environment:
+#     name: review/$CI_COMMIT_REF_SLUG
+#     action: start
+#     auto_stop_in: 2 hours
+
+build-test-image:
   stage: build-test-image
   image:
     name: $KANIKO_IMAGE
     entrypoint: [""]
-
   retry: 2
-
   script:
     # - echo "Building Image"
     - /kaniko/executor
-      --cache=true --cache-copy-layers=true --cache-ttl=128h
+      --cache=true --cache-copy-layers=true --cache-ttl=24h
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${IMAGE_NAME}-test"
@@ -80,9 +106,6 @@ angular-test:   # This job runs the angular tests.
 
   variables:
     NODE_ENV: ci
-    DB_USER: test_u_$CI_COMMIT_SHORT_SHA
-    DB_PASSWORD: $DB_PASS
-    DB_DATABASE: test_$CI_COMMIT_SHORT_SHA
   image: ${IMAGE_NAME}-test
   script:
     - cd /app && ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox
@@ -100,35 +123,29 @@ lint-test-job:   # This job also runs in the test stage.
 
 prisma-test-job:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
-  environment:
-    name: integration
   services:
     - mariadb:latest
+  # environment:
+  #   name: review/$CI_COMMIT_REF_SLUG
+  retry: 2
   variables:
-    MYSQL_DATABASE: test_${CI_PROJECT_NAME}_database
-    MYSQL_ROOT_PASSWORD: root_password
-    DATABASE_URL: mysql://test_${CI_PROJECT_NAME}_user:password@mariadb:3306/test_${CI_PROJECT_NAME}_database
-    MYSQL_USER: test_${CI_PROJECT_NAME}_user
-    MYSQL_PASSWORD: password
+    DATABASE_URL: mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@mariadb:3306/${MARIADB_DATABASE}
   image: ${IMAGE_NAME}-test
   script:
     - echo "Running Prisma migrate..."
+    - sleep 10
     - cd /app && bun prisma migrate reset -f
     - echo "Done."
 
 # delete-test-image:
-#   before_script:
-#     - curl --fail --show-error --location "https://github.com/genuinetools/reg/releases/download/v$REG_VERSION/reg-linux-amd64" --output ./reg
-#     - echo "$REG_SHA256  ./reg" | sha256sum -c -
-#     - chmod a+x ./reg
-#   image: curlimages/curl:7.86.0
+#   stage: .post
+#   rules:
+#       - when: always
+#   image: $REMOVER_IMAGE
 #   script:
-#     - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}-test
-#     - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}
-#   variables:
-#     REG_SHA256: ade837fc5224acd8c34732bf54a94f579b47851cc6a7fd5899a98386b782e228
-#     REG_VERSION: 0.16.1
-#   stage: cleanup
+#     - echo "reg-tool rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}-test"
+#     - reg-tool rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}-test
+#     - reg-tool rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD ${IMAGE_NAME}
 
 # deploy-job:      # This job runs in the deploy stage.
 #   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
@@ -137,3 +154,4 @@ prisma-test-job:   # This job also runs in the test stage.
 #     - echo "Deploying application..."
 #     - echo "Not really happening yet!"
 #     - echo "Application successfully deployed."
+

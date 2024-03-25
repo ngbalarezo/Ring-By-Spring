@@ -1,4 +1,5 @@
 import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,6 +14,7 @@ import { UserService } from '../services/user.service';
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.css'
 })
+
 
 export class CreateUserComponent {
 
