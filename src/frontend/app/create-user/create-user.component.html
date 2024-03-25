@@ -1,1 +1,48 @@
-<p>create-user works!</p>
+<h1>Create User</h1>
+<div>
+  <label for="firstName">First Name: </label>
+  <input id="firstName" [(ngModel)]="firstName">
+</div>
+
+<div>
+  <label for="lastName">Last Name: </label>
+  <input id="lastName" [(ngModel)]="lastName">
+</div>
+
+<div>
+  <label for="dob">Date of Birth: </label>
+  <input id="dob" [(ngModel)]="dob">
+</div>
+
+<div>
+  <label for="gender">Gender: </label>
+  <input id="gender" [(ngModel)]="gender">
+</div>
+
+<div>
+  <label for="description">Description: </label>
+  <input id="description" [(ngModel)]="description">
+</div>
+
+<div>
+  <label for="profilePicture">Profile Picture: </label>
+  <input id="profilePicture" [(ngModel)]="profilePicture">
+</div>
+
+<div>
+  <label for="interest1">Interest 1: </label>
+  <input id="interest1" [(ngModel)]="interest1">
+</div>
+
+<div>
+  <label for="interest2">Interest 2: </label>
+  <input id="interest2" [(ngModel)]="interest2">
+</div>
+
+<div>
+  <label for="interest3">Interest 3: </label>
+  <input id="interest3" [(ngModel)]="interest3">
+</div>
+<div>
+  <input type="button" value="Create" (click)="save()">
+</div>
