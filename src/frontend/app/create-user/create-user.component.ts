@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+//import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from "../../../models/user";
 import { UserService } from '../services/user.service';
 //import { CreatePosts } from '../create-posts/create-posts.component';
@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'ng-create-user',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.css'
 })
