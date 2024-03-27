@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-//import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from "../../../models/user";
 import { UserService } from '../services/user.service';
 //import { CreatePosts } from '../create-posts/create-posts.component';
