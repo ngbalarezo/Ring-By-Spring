@@ -8,12 +8,12 @@ import { Observable, of } from 'rxjs';
 export class UserService {
 
   // TODO Connect to the webserver and delete this.
-  users: User[] = [{
-    firstName: 'Kyle',
-    lastName: 'Crocodile',
-    gender: 'Male',
-    dob: new Date('03/25/1900'),
-  }];
+  users: User[] = [
+    {firstName: 'Bugs', lastName: 'Bunny', gender: 'Male', dob: new Date('06/27/1940')},
+    {firstName: 'Daffy', lastName: 'Duck', gender: 'Male', dob: new Date('04/17/1937')},
+    {firstName: 'Tina Russo', lastName: 'Duck', gender: 'Female', dob: new Date('12/02/1987')},
+
+  ];
   nextId: number = 1;
   constructor() { }
 
