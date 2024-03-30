@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { User } from "../../../models/user";
 import { UserService } from '../services/user.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'ng-list-users',
   standalone: true,
-  imports: [UserService, NgFor],
+  imports: [FormsModule, UserService, NgIf, NgFor, UpperCasePipe],
   templateUrl: './list-users.component.html',
   styleUrl: './list-users.component.css'
 })
@@ -18,4 +18,8 @@ export class ListUsersComponent {
 
   users = this.userService.users;
 
+  selectedUser?: User;
+  onSelect(user: User): void {
+    this.selectedUser = user;
+  }
 }
