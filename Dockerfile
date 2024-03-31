@@ -3,8 +3,6 @@ FROM registry.franciscan.edu/spr24-web-groups/image-base:base as common-build-st
 
 WORKDIR /app
 
-COPY bun.lockb package-lock.json package.json ./
-
 EXPOSE 3000
 
 ######################################################################
