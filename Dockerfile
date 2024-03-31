@@ -3,9 +3,7 @@ FROM registry.franciscan.edu/spr24-web-groups/image-base:base as common-build-st
 
 WORKDIR /app
 
-COPY . ./
-
-RUN bun install
+COPY bun.lockb package-lock.json package.json ./
 
 EXPOSE 3000
 
@@ -18,8 +16,6 @@ FROM registry.franciscan.edu/spr24-web-groups/image-base:base-test as test-build
 WORKDIR /app
 
 COPY . ./
-
-RUN npm install
 
 #RUN chmod +x /app/docker-start-mariadb.sh
 
