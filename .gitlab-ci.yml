@@ -108,7 +108,8 @@ angular-test:   # This job runs the angular tests.
     NODE_ENV: ci
   image: ${IMAGE_NAME}-test
   script:
-    - cd /app && ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox
+    - cd /app && ls ./node_modules/.bin/
+    - cd /app && ./node_modules/.bin/ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox
     # TODO: Set up code coverage.
     # - echo "Code coverage is 90%"
 
