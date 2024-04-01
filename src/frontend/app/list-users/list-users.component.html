@@ -1,21 +1,50 @@
 <h2>Users</h2>
 <ul class="users">
-  <li *ngFor="let hero of heroes">
+  <li *ngFor="let user of users">
     <button [class.selected]="user === selectedUser" type="button" (click)="onSelect(user)">
-      <span class="badge">{{user.userID}}</span>
-      <span class="firstName">{{user.firstName}}</span>
+      <span class="firstName">{{user.firstName}} </span>
       <span class="lastName">{{user.lastName}}</span>
     </button>
   </li>
 </ul>
 
 <div *ngIf="selectedUser">
-  <h2>{{selectedUser.firstName | uppercase}} {{selectedUser.lastName | uppercase}} Details</h2>
-  <div>id: {{selectedUser.userID}}</div>
+  <h2>{{selectedUser.firstName | uppercase}} {{selectedUser.lastName | uppercase}} DETAILS</h2>
+  <div>User ID: {{selectedUser.userID}}</div>
   <div>
-    <label for="user-first-name">User First Name: </label>
-    <input id="user-name" [(ngModel)]="selectedUser.firstName" placeholder="First Name">
-    <label for="user-last-name">User Last Name: </label>
-    <input id="user-name" [(ngModel)]="selectedUser.lastName" placeholder="Last Name">
+    <label for="user-first-name">First Name: </label>
+    <input id="user-first-name" [(ngModel)]="selectedUser.firstName" placeholder="First Name">
+  </div>
+  <div>
+    <label for="user-last-name">Last Name: </label>
+    <input id="user-last-name" [(ngModel)]="selectedUser.lastName" placeholder="Last Name">
+  </div>
+  <div>
+    <label for="user-dob">DOB: </label>
+    <input id="user-dob" [(ngModel)]="selectedUser.dob" placeholder="DOB">
+  </div>
+  <div>
+    <label for="user-gender">Gender: </label>
+    <input id="user-gender" [(ngModel)]="selectedUser.gender" placeholder="Gender">
+  </div>
+  <div>
+    <label for="user-description">Description: </label>
+    <input id="user-description" [(ngModel)]="selectedUser.description" placeholder="Description">
+  </div>
+  <div>
+    <label for="user-profile-picture">Profile Picture: </label>
+    <input id="user-profile-picture" [(ngModel)]="selectedUser.profilePicture" placeholder="Profile Picture">
+  </div>
+  <div>
+    <label for="user-interest1">Interest 1: </label>
+    <input id="user-interest1" [(ngModel)]="selectedUser.interest1" placeholder="Interest 1">
+  </div>
+  <div>
+    <label for="user-interest2">Interest 2: </label>
+    <input id="user-interest2" [(ngModel)]="selectedUser.interest2" placeholder="Interest 2">
+  </div>
+  <div>
+    <label for="user-interest3">Interest 3: </label>
+    <input id="user-interest3" [(ngModel)]="selectedUser.interest3" placeholder="Interest 3">
   </div>
 </div>

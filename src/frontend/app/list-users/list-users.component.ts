@@ -14,6 +14,14 @@ import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 })
 export class ListUsersComponent implements OnInit{
   
+  user: User = {
+    userID: 0,
+    firstName: 'Test',
+    lastName: 'Dummy',
+    dob: new Date('11/11/1111'),
+    gender: 'Male'
+  }
+
   selectedUser?: User;
 
   users: User[] = [];
