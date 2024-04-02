@@ -25,7 +25,7 @@ stages:          # List of stages for jobs, and their order of execution
 #   - mariadb:latest
 
 variables:
-  IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   DOCKER_HOST: tcp://localhost:2375
   KANIKO_IMAGE: gcr.io/kaniko-project/executor:v1.21.1-debug
   BASE_TEST_IMAGE: registry.franciscan.edu/spr24-web-groups/image-base:base-test
@@ -108,7 +108,8 @@ angular-test:   # This job runs the angular tests.
     NODE_ENV: ci
   image: ${IMAGE_NAME}-test
   script:
-    - cd /app && ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox
+    - ls /app/node_modules/.bin/ng
+    - cd /app && /app/node_modules/.bin/ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox
     # TODO: Set up code coverage.
     # - echo "Code coverage is 90%"
 
