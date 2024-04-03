@@ -42,7 +42,7 @@ export class CreateUserComponent {
 
   save(): void {
     const toSave: User = {
-      firstName: this.lastName,
+      firstName: this.firstName,
       lastName: this.lastName,
       dob: new Date(this.dob),
       gender: this.gender,
