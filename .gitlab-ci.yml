@@ -135,8 +135,10 @@ prisma-test-job:   # This job also runs in the test stage.
   script:
     - echo "Running Prisma migrate..."
     - sleep 10
-    - cd /app && bun prisma migrate reset -f
+    - cd /app && bun prisma db push
     - echo "Done."
+    - which mariadb
+    - echo "show tables;" | mariadb -u "${MARIADB_USER}" --host=mariadb --port=3306 --password="${MARIADB_PASSWORD}" "${MARIADB_DATABASE}"
 
 # delete-test-image:
 #   stage: .post
