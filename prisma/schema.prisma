@@ -14,7 +14,23 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  userID          Int      @id @default(autoincrement())
+  firstName       String  
+  lastName        String
+  dob             DateTime 
+  gender          String 
+  description     String?
+  profilePicture  String?
+  interest1       String?
+  interest2       String?
+  interest3       String?
+
+}
+
+model Comment {
+  commentID   Int       @id
+  content     String
+  createdAt   DateTime  @default(now()) 
+  //post        Posts?    @relation(fields: [postId], references: [postId])
+  postId      Int?
 }
