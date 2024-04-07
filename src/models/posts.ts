@@ -5,7 +5,7 @@ Model for posts
 */
 export interface Posts {
     //postID to identify unique posts
-    postID: number,
+    postID: string, 
     //user represents the id of the user who posted the post
     //!FIXME: below must be inserted in service/component!
     userid: number,
