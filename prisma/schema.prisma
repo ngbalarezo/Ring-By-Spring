@@ -17,7 +17,7 @@ model User {
   userID          Int      @id @default(autoincrement())
   firstName       String  
   lastName        String
-  dob             DateTime @dob
+  dob             DateTime 
   gender          String 
   description     String?
   profilePicture  String?
