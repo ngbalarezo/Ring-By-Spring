@@ -1,4 +1,5 @@
-import {User} from "./user";
+//import {User} from "./user"; 
+
 /*
 Model for posts
 */
