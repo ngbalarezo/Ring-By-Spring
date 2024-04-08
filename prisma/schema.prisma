@@ -34,3 +34,13 @@ model Comment {
   //post        Posts?    @relation(fields: [postId], references: [postId])
   postId      Int?
 }
+
+
+model Posts {
+  postId  String @id
+  userId  String
+  content  String
+  timeOfPost string
+  //image string need to figure out how to implement this
+
+}
