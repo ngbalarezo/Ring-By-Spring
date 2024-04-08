@@ -37,10 +37,10 @@ model Comment {
 
 
 model Posts {
-  postId  String @id
-  userId  String
+  postID  String @id
+  userid  String
   content  String
-  timeOfPost string
-  //image string need to figure out how to implement this
+  timeOfPost String
+  //image String need to figure out how to implement this
 
 }
