@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../services/posts.service';
 import { Posts } from '../../../models/posts';
 import { NgFor } from '@angular/common';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'ng-list-post',
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   templateUrl: './list-post.component.html',
   styleUrl: './list-post.component.css'
 })
-export class ListPostComponent {
+export class ListPostComponent implements OnInit {
   
   constructor(private postsService: PostsService) {}
   
