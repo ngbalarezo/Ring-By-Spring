@@ -20,6 +20,16 @@ export class ListPostComponent {
   ngOnInit() {
     this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts;
+      if (!posts || posts.length === 0) {
+        const newPost: Posts = 
+      { 
+        postID: '1', 
+        content: 'Dummy content 1', 
+        timeOfPost: '1999', 
+        userid: 'user1' 
+      };
+      this.posts.push(newPost);
+    }
     });
   }
 
