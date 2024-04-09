@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Posts } from '../../../models/posts';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class PostsService {
     console.log(post)
   }
 
-  getAllPosts(): Posts[] {
-    return this.posts;
+  getAllPosts(): Observable<Posts[]> {
+    return of(this.posts);
   }
 
 }
