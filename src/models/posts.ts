@@ -8,7 +8,7 @@ export interface Posts {
     postID: string, 
     //user represents the id of the user who posted the post
     //!FIXME: below must be inserted in service/component!
-    userid: number,
+    userid: string,
     //content is the text of the post
     content: string,
     //timeOfPost says when the post was made
