@@ -8,10 +8,10 @@ export interface Matches {
   //Date when the pair of users matched.
   timeMatched: string,
 
-  //First user in the match. User that first reaches out to the recieving user, the userCandidate.
-  userGallant: User,
+  //First user in the match. User that first reaches out to the recieving user, the userB.
+  userA: User,
 
-  //Second user in the match. User that recieves the match and accepts or rejects it from the userGallant.
-  userCandidate: User,
+  //Second user in the match. User that recieves the match and accepts or rejects it from the userA.
+  userB: User,
   
 }
