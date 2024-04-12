@@ -33,6 +33,8 @@ export class CreatePostsComponent {
     };
 
     this.postService.createPost(newPost);
+    console.log('Saved ',newPost,', returning home.');
+    this.router.navigate(['/']);
 }
 
 
