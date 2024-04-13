@@ -1,5 +1,4 @@
-import { EmailValidator } from "@angular/forms";
-import { Posts } from "./posts";
+//import { Posts } from "./posts";
 
 //Model for users
 

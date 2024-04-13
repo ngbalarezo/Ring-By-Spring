@@ -1,10 +1,9 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { FormsModule, FormControl, FormGroup, ReactiveFormsModule, Validators, EmailValidator } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators, EmailValidator } from '@angular/forms';
 import { User } from "../../../models/user";
 import { UserService } from '../services/user.service';
-import { first, last } from 'rxjs';
+//import { first, last } from 'rxjs';
 //import { CreatePosts } from '../create-posts/create-posts.component';
 
 @Component({
