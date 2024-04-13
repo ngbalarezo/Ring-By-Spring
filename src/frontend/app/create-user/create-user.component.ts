@@ -18,11 +18,10 @@ import { first, last } from 'rxjs';
 export class CreateUserComponent {
 
   constructor(private userService: UserService, private router: Router) {}
-
+  
   userForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    //!FIXME: LOOK INTO EMAIL VALIDATION BELOW
     userEmail: new FormControl(EmailValidator.toString(), Validators.required),
     dob: new FormControl(new Date().toISOString().slice(0, 10), Validators.required),
     gender: new FormControl('', Validators.required),
@@ -34,12 +33,11 @@ export class CreateUserComponent {
 
   });
 
-  //!FIXME: UPDATE THE HTML!!!!! CHECK THE SERVICE!!!! RESOLVE THE FIXMES!!!!!
-
+  //!FIXME: ask about 
   save(): void {
     const firstName = this.userForm.value.firstName!;
     if (!firstName) {
-      throw "First name required!"
+      throw "First name required!"  
     }
     const lastName = this.userForm.value.lastName!;
     if (!lastName) {
@@ -63,7 +61,6 @@ export class CreateUserComponent {
     const interest2 = this.userForm.value.interest2!;
     const interest3 = this.userForm.value.interest3!;
 
-
     const newUser: User = {
       firstName: firstName,
       lastName: lastName,
@@ -75,8 +72,10 @@ export class CreateUserComponent {
       interest1: interest1,
       interest2: interest2,
       interest3: interest3,
-      
+      //!FIXME: ask about posts array
     }
+
+    //!FIXME: ASK ABOUT ERROR MESSAGE DISPLAY. MESSAGES DISPLAY IN INSPECT PAGE BUT NOT IN MAIN PAGE
 
     this.userService.createUser(newUser).subscribe(user => {
       console.log('Saved ',user,', returning home.');

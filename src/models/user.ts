@@ -2,6 +2,11 @@ import { EmailValidator } from "@angular/forms";
 import { Posts } from "./posts";
 
 //Model for users
+
+  //!FIXME: ASK ABOUT PASSWORD
+  //!FIXME: ASK ABOUT ROLES, PRISMA VS. TYPESCRIPT
+  //!FIXME: ASK ABOUT POSTS[]
+
 export interface User {
   //userID is a unique identifier for each user
   userID?: number;
@@ -11,9 +16,7 @@ export interface User {
   //user email
   userEmail: string;
   //user password
-  //!FIXME: ASK ABOUT PASSWORD
   //password: string;
-  //!FIXME: ASK ABOUT ROLES, PRISMA VS. TYPESCRIPT
   //user's date of birth
   dob: string;
   //user's gender
@@ -26,7 +29,6 @@ export interface User {
   interest1?: string;
   interest2?: string;
   interest3?: string;
-  //!FIXME: WORK THIS INTO USER SERVICE
   //posts: Posts[];
   
 }
