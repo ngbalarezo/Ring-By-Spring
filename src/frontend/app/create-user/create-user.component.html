@@ -1,48 +1,62 @@
 <h1>Create User</h1>
-<div>
-  <label for="firstName">First Name: </label>
-  <input id="firstName" [(ngModel)]="firstName">
-</div>
+<form [formGroup]="userForm" (submit)="save()">
+  <div>
+    <label for="firstName">First Name: </label>
+    <input id="firstName" required type="string" formControlName="firstName">
+  </div>
 
-<div>
-  <label for="lastName">Last Name: </label>
-  <input id="lastName" [(ngModel)]="lastName">
-</div>
+  <div>
+    <label for="lastName">Last Name: </label>
+    <input id="lastName" required type="string" formControlName="lastName">
+  </div>
 
-<div>
-  <label for="dob">Date of Birth: </label>
-  <input id="dob" [(ngModel)]="dob">
-</div>
+  <div>
+    <label for="dob">Date of Birth: </label>
+    <input id="dob" required type="date" formControlName="dob">
+  </div>
 
-<div>
-  <label for="gender">Gender: </label>
-  <input id="gender" [(ngModel)]="gender">
-</div>
+  <div>
+    <label for="gender">Gender: </label>
+    <input id="gender" required type="string" formControlName="gender">
+  </div>
 
-<div>
-  <label for="description">Description: </label>
-  <input id="description" [(ngModel)]="description">
-</div>
+  <div>
+    <label for="description">Description: </label>
+    <input id="description" required type="string" formControlName="description">
+  </div>
 
-<div>
-  <label for="profilePicture">Profile Picture: </label>
-  <input id="profilePicture" [(ngModel)]="profilePicture">
-</div>
+  <div>
+    <label for="profilePicture">Profile Picture URL: </label>
+    <input id="profilePicture" required type="file" formControlName="profilePicture">
+  </div>
 
-<div>
-  <label for="interest1">Interest 1: </label>
-  <input id="interest1" [(ngModel)]="interest1">
-</div>
+  <div>
+    <label for="interest1">Interest 1: </label>
+    <input id="interest1" required type="string" formControlName="interest1">
+  </div>
+  
+  <div>
+    <label for="interest2">Interest 2: </label>
+    <input id="interest2" required type="string" formControlName="interest2">
+  </div>
+  
+  <div>
+    <label for="interest3">Interest 3: </label>
+    <input id="interest3" required type="string" formControlName="interest3">
+  </div>
 
-<div>
-  <label for="interest2">Interest 2: </label>
-  <input id="interest2" [(ngModel)]="interest2">
-</div>
+  <div>
+    <button type="submit">Create</button>
+  </div>
+</form>
 
-<div>
-  <label for="interest3">Interest 3: </label>
-  <input id="interest3" [(ngModel)]="interest3">
-</div>
-<div>
-  <input type="button" value="Create" (click)="save()">
-</div>
+
+
+
+
+
+
+
+
+
+
