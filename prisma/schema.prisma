@@ -17,7 +17,8 @@ model User {
   userID          Int      @id @default(autoincrement())
   firstName       String  
   lastName        String
-  dob             DateTime 
+  dob             String 
+  userEmail       String
   gender          String 
   description     String?
   profilePicture  String?
@@ -34,7 +35,6 @@ model Comment {
   //post        Posts?    @relation(fields: [postId], references: [postId])
   postId      Int?
 }
-
 
 model Posts {
   postID  String @id
