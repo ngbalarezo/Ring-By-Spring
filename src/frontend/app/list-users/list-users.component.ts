@@ -18,7 +18,8 @@ export class ListUsersComponent implements OnInit{
     userID: 0,
     firstName: 'Test',
     lastName: 'Dummy',
-    dob: new Date('11/11/1111'),
+    dob: '11-11-1111',
+    userEmail: 'test@gmail.com',
     gender: 'Male'
   }
 
