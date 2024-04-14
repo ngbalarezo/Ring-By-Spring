@@ -1,4 +1,5 @@
 import {Elysia} from 'elysia'
+import { configureUsersRoutes } from './controller/user.controller';
 
 const PORT = process.env['LISTEN_PORT'];
 console.log(`Listening on port ${PORT}`);
@@ -12,3 +13,4 @@ new Elysia()
     return (await staticFile.exists()) ? staticFile : fallBackFile;
   })
   .listen(PORT);
+  .group("/api/users", configureUsersRoutes)
