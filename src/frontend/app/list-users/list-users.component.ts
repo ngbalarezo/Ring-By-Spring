@@ -13,15 +13,6 @@ import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
   styleUrl: './list-users.component.css'
 })
 export class ListUsersComponent implements OnInit{
-  
-  user: User = {
-    userID: 0,
-    firstName: 'Test',
-    lastName: 'Dummy',
-    dob: '11-11-1111',
-    userEmail: 'test@gmail.com',
-    gender: 'Male'
-  }
 
   selectedUser?: User;
 
