@@ -1,4 +1,4 @@
-import {Elysia} from 'elysia'
+import {Elysia} from 'elysia';
 import { configureUsersRoutes } from './controller/user.controller';
 
 const PORT = process.env['LISTEN_PORT'];
@@ -12,5 +12,5 @@ new Elysia()
     const fallBackFile = Bun.file(`./${STATIC_ROOT}/index.html`);
     return (await staticFile.exists()) ? staticFile : fallBackFile;
   })
-  .listen(PORT);
-  .group("/api/users", configureUsersRoutes)
+  .listen(PORT)
+  .group("/api/users", configureUsersRoutes);

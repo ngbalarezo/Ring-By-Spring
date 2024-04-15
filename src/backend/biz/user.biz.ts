@@ -3,8 +3,8 @@ import { User } from "../../models/user";
 
 const db = new PrismaClient();
 
-export async function createUser(user: User): Promise<User[]> {
-  return db.users.create({data: user}.then(convertUser));
+export async function createUser(user: User): Promise<User> {
+  return db.users.create({data: user}).then(convertUser);
 }
 
 export async function listUsers(nameQuery: string): Promise<User[]> {
