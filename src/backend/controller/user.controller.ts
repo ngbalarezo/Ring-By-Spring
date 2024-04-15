@@ -23,7 +23,7 @@ export function configureUsersRoutes(app: Elysia) {
 
   })})
 
-  .post("create", {body: 'user'})
+  .post("create", create, {body: 'user'})
   .get("/", list)
 
 }
