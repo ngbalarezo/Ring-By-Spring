@@ -12,5 +12,5 @@ new Elysia()
     const fallBackFile = Bun.file(`./${STATIC_ROOT}/index.html`);
     return (await staticFile.exists()) ? staticFile : fallBackFile;
   })
-  .listen(PORT)
-  .group("/api/users", configureUsersRoutes);
+  .group("/api/users", configureUsersRoutes)
+  .listen(PORT);
