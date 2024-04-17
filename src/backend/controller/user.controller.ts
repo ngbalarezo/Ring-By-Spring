@@ -13,13 +13,14 @@ export function configureUsersRoutes(app: Elysia) {
     }),
     dob: t.String({
       format: 'date',
+      default: '0000-00-00'
     }),
     gender: t.String(),
-    description: t.String(),
-    profilePicture: t.String(),
-    interest1: t.String(),
-    interest2: t.String(),
-    interest3: t.String(),
+    description: t.Optional(t.String()),
+    profilePicture: t.Optional(t.String()),
+    interest1: t.Optional(t.String()),
+    interest2: t.Optional(t.String()),
+    interest3: t.Optional(t.String()),
 
   })})
 
