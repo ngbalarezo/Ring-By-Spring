@@ -7,13 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="page-wrapper">
       <aside class="side-bar">
         <div class="homepage-badge">
-          <img id="homepage-badge-img" src="/src/images/bible-ring.png" alt="ring-badge-img"/>
-          <p class="badge-text">Ring by Spring</p>
+          <img id="homepage-badge-img" src="assets/bible-ring.png" alt="ring-badge-img"/>
+          <p id="homepage-badge-text">Ring by Spring</p>
         </div>
         <div class="component" id="create-user">
           <a class="component-link" [routerLink]="['/create-user']">

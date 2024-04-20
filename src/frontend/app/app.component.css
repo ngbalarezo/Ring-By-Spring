@@ -21,24 +21,34 @@ html,body{
   width: 20vw;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   margin-left: 0 auto;
   margin-right: 0 auto;
 }
 .homepage-badge{
   background-color:floralwhite;
-  height: 12%;
-  width: 85%;
+  height: 10%;
+  width: 95%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   margin-left: 0 auto;
   margin-right: 0 auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
-.homepage-badge-img{
-  height: 100%;
-  width: 100%;
+#homepage-badge-img{
+  height: 60px;
+  width: 90px;
+}
+#homepage-badge-text{
+  color: black;
+  margin: 10px;
+  font-family: "Allura", cursive;
+  font-style: normal;
+  font-size: 34px;
+  font-weight: bold;
 }
 .component{
   background-color:floralwhite;
