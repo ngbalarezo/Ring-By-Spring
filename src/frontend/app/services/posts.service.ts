@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Posts } from '../../../models/posts';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,14 @@ export class PostsService {
 
   private posts: Posts[] = [];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  createPost(post: Posts): void {
-    this.posts.push(post);
-    console.log(post)
+  createPost(post: Posts): Observable<Posts> {
+    return this.http.post<Posts>('/api/posts/create', post)
   }
 
   getAllPosts(): Observable<Posts[]> {
-    return of(this.posts);
+    return this.http.get<Posts[]>('/api/posts/');
   }
 
 }
