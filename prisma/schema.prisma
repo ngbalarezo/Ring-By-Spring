@@ -38,7 +38,7 @@ model Comments {
 
 model Post {
   postID  String @id
-  userid  Users @relation(fields: [userID], references [id])
+  userID  String
   content  String
   timeOfPost String
   //image String need to figure out how to implement this
