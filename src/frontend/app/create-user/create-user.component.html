@@ -1,5 +1,5 @@
 <h1>Create User</h1>
-<form [formGroup]="userForm" (submit)="save()">
+<form class="create-form" [formGroup]="userForm" (submit)="save()">
   <div>
     <label for="firstName">First Name: </label>
     <input id="firstName" required type="string" formControlName="firstName">

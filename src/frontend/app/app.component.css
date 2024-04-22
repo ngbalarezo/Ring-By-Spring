@@ -52,13 +52,14 @@ html,body{
 }
 .component{
   background-color:floralwhite;
-  height: 12%;
+  height: 8%;
   width: 85%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   margin-left: 0 auto;
   margin-right: 0 auto;
+  border-radius: 10px;
   transition: 0.5s;
 }
 .component:hover{
@@ -101,7 +102,3 @@ html,body{
   margin-left: 0 auto;
   margin-right: 0 auto;
 }
-.component{
-
-}
-
