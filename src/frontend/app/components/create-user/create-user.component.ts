@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, EmailValidator } from '@angular/forms';
-import { User } from "../../../models/user";
-import { UserService } from '../services/user.service';
+import { User } from "../../../../models/user";
+import { UserService } from '../../services/user.service';
 //import { first, last } from 'rxjs';
 //import { CreatePosts } from '../create-posts/create-posts.component';
 

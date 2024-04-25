@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { User } from "../../../models/user";
-import { UserService } from '../services/user.service';
+import { User } from "../../../../models/user";
+import { UserService } from '../../services/user.service';
 import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 
 @Component({

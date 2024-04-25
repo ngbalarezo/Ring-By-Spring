@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PostsService } from '../services/posts.service';
-import { Posts } from '../../../models/posts';
+import { PostsService } from '../../services/posts.service';
+import { Posts } from '@prisma/client';
 import { FormsModule } from '@angular/forms';
 
 @Component({
