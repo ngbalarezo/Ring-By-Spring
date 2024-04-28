@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-dark-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
 
-html,body{
-  background-color: darkgreen;
-  height: 100vh;
-  width: 100vw;
-  margin: 0px auto;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
