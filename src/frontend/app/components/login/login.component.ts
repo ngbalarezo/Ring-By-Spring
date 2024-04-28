@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
@@ -13,7 +14,8 @@ import { ButtonModule } from 'primeng/button';
     CardModule,
     InputTextModule,
     ReactiveFormsModule,
-    ButtonModule
+    ButtonModule,
+    NgIf
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -25,4 +27,8 @@ export class LoginComponent {
   })
 
   constructor(private fb: FormBuilder) {}
+
+  get email() { return this.loginForm.controls['email']; }
+
+  get password() { return this.loginForm.controls['password']; }
 }
