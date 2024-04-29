@@ -1,5 +1,3 @@
-import { StringLike } from "bun";
-
 export interface User {
   id: string;
   firstName: string;
