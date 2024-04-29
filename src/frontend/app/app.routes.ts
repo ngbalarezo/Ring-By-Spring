@@ -9,7 +9,14 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 export const routes: Routes = [
   {
     path: '',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    children: [
+      {
+        path: 'create-user',
+        component: CreateUserComponent
+      }
+
+    ]
   },
   {
     path: 'main',
