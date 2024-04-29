@@ -6,7 +6,8 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { passwordMatchValidator } from '../../shared/password-match.directive';
-
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../interfaces/auth';
 
 @Component({
   selector: 'ng-register',
@@ -33,7 +34,7 @@ export class RegisterComponent {
     validators: passwordMatchValidator
   })
 
-  constructor(private fb: FormBuilder){}
+  constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   get firstName() { return this.registerForm.controls['firstName']; }
 
@@ -44,5 +45,16 @@ export class RegisterComponent {
   get password() { return this.registerForm.controls['password']; }
 
   get confirmPassword() { return this.registerForm.controls['confirmPassword']; }
+
+  submitDetails() {
+    //deconstructs data and stores it in postData
+    const postData = { ...this.registerForm.value };
+    //deletes confirmPassword, this data does not need to be stored in the backend
+    delete postData.confirmPassword;
+    this.authService.registerUser(postData as User).subscribe(
+      response => console.log(response),
+      error => console.log(error)
+    )
+  }
 
 }

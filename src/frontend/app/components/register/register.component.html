@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm">
+<form [formGroup]="registerForm" (ngSubmit)="submitDetails()">
   <p-card header="Register" [style]="{width: '360px', }">
     <div class="field">
       <label for="firstName">First name</label>
@@ -64,7 +64,8 @@
     </div>
     <small 
       *ngIf="password.invalid && (password.dirty || password.touched)" 
-      class="block p-error">
+      class="block p-error"
+      >
       <div class="mb-3" *ngIf="password.errors?.['required']">Password is required.</div>
       <div class="mb-3" *ngIf="password.errors?.['password']">Password should be valid.</div>
     </small>
@@ -80,21 +81,19 @@
         />
     </div>
     <small 
-      *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" 
-      class="block p-error"
+    *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" 
+     class="block p-error"
       >
       <div class="mb-3" *ngIf="confirmPassword.errors?.['required']">Confirm the password.</div>
     </small>
-    <small
-      class="block p-error"
-      *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword.valid && password.valid"
-      >
+    <small class="block p-error" *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword.valid && password.valid">
       Password should match.
     </small>
     <p-button 
       label="REGISTER" 
       styleClass="w-full"
       [disabled]="registerForm.invalid"
+      type="submit"
     ></p-button>
     <div class="mt-2">Already a member? <a [routerLink]="['/login']">Login</a></div>
   </p-card>
