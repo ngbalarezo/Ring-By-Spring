@@ -13,38 +13,32 @@
 <div class="page-wrapper">
     <aside class="side-bar">
       <div class="homepage-badge">
-        <img id="homepage-badge-img" src="assets/bible-ring.png" alt="ring-badge-img"/>
+        <img id="homepage-badge-img" src="assets/bible-ring.png" alt="ring-badge-img" routerLink="/main"/>
         <p id="homepage-badge-text">Ring by Spring</p>
       </div>
       <div class="component" id="create-user">
-        <a class="component-link" [routerLink]="['/create-user']">
+        <a class="component-link" routerLink="/main/create-user">
           <i class="material-icons">person_add</i>
           <p class="component-text">Create User</p>
         </a>
       </div>
       <div class="component" id="list-users">
-        <a class="component-link" [routerLink]="['/list-users']">
+        <a class="component-link" routerLink="/main/list-users">
           <i class="material-icons">format_list_bulleted</i>
           <p class="component-text">List Users</p>
         </a>
       </div>
       <div class="component" id="create-post">
-        <a class="component-link" [routerLink]="['/create-post']">
+        <a class="component-link" routerLink="/main/create-post">
           <i class="material-icons">post_add</i>
           <p class="component-text">Create Post</p>
         </a>
       </div>
-      <div class="component" id="list-post">
-        <a class="component-link" [routerLink]="['/list-post']">
-          <i class="material-icons">list</i>
-          <p class="component-text">List Posts</p>
-        </a>
-      </div>
-      <router-outlet></router-outlet>
     </aside>
     <!--LOOK INTO THIS SEPARATION LINE...-->
     <div class="separation-line"></div> 
     <div class="content-wrapper">
+    <router-outlet></router-outlet>
 
     </div>
   </div>
