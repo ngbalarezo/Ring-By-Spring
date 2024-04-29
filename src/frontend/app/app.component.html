@@ -1,5 +1,57 @@
-<h1><a [routerLink]="['/create-user']">Create User</a></h1>
-<h1><a [routerLink]="['/list-users']">List Users</a></h1>
-<h1><a [routerLink]="['/create-post']">Create Post</a></h1>
-<h1><a [routerLink]="['/list-post']">List Post</a></h1>
-<router-outlet></router-outlet>
+<!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ring by Spring</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <aside class="side-bar">
+        <div class="homepage-badge">
+          <img id="homepage-badge-img" src="assets/bible-ring.png" alt="ring-badge-img"/>
+          <p id="homepage-badge-text">Ring by Spring</p>
+        </div>
+        <div class="component" id="create-user">
+          <a class="component-link" [routerLink]="['/create-user']">
+            <i class="material-icons">person_add</i>
+            <p class="component-text">Create User</p>
+          </a>
+        </div>
+        <div class="component" id="list-users">
+          <a class="component-link" [routerLink]="['/list-users']">
+            <i class="material-icons">format_list_bulleted</i>
+            <p class="component-text">List Users</p>
+          </a>
+        </div>
+        <div class="component" id="create-post">
+          <a class="component-link" [routerLink]="['/create-post']">
+            <i class="material-icons">post_add</i>
+            <p class="component-text">Create Post</p>
+          </a>
+        </div>
+        <div class="component" id="list-post">
+          <a class="component-link" [routerLink]="['/list-post']">
+            <i class="material-icons">list</i>
+            <p class="component-text">List Posts</p>
+          </a>
+        </div>
+        <router-outlet></router-outlet>
+      </aside>
+      <!--LOOK INTO THIS SEPARATION LINE...-->
+      <div class="separation-line"></div> 
+      <div class="content-wrapper">
+
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
