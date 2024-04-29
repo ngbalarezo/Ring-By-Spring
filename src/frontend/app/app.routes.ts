@@ -4,9 +4,13 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { CreatePostsComponent } from './create-posts/create-posts.component';
 import { ListPostComponent } from './list-post/list-post.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 export const routes: Routes = [
-  
+  {
+    path: '',
+    component: LandingPageComponent
+  },
   {
     path: 'main',
     component: MainPageComponent,
