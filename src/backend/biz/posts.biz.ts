@@ -7,7 +7,7 @@ export async function createPost(post: Posts): Promise<Posts> {
     return db.posts.create({data: post}).then(convertPosts);
   }
 
-export async function listPosts(nameQuery: string): Promise<Posts[]> {
+export async function listPosts(): Promise<Posts[]> {
   return db.posts.findMany({
     orderBy: {
       timeOfPost: 'asc',

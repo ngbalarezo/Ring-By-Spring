@@ -24,5 +24,5 @@ async function create(ctxt: Context): Promise<Post> {
   }
   
   async function list(): Promise<Post[]> {
-    return listPosts("");
+    return listPosts();
   }
