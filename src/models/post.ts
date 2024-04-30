@@ -3,7 +3,7 @@
 /*
 Model for posts
 */
-export interface Posts {
+export interface Post {
     //postID to identify unique posts
     postID: string, 
     //user represents the id of the user who posted the post

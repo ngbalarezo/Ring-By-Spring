@@ -1,5 +1,5 @@
-import { Post, PrismaClient } from "@prisma/client";
-import { Posts } from "../../models/posts";
+import { Posts, PrismaClient } from "@prisma/client";
+import { Post } from "../../models/post";
 
 const db = new PrismaClient();
 
@@ -8,14 +8,9 @@ export async function createPost(post: Posts): Promise<Posts> {
   }
 
 export async function listPosts(nameQuery: string): Promise<Posts[]> {
-  return db.post.findMany({
-    where: {
-      firstName: {
-        contains: nameQuery
-      },
-    },
+  return db.posts.findMany({
     orderBy: {
-      lastName: 'asc',
+      timeOfPost: 'asc',
     },
   }).then(post => {
     return post.map(convertPosts);

@@ -1,4 +1,4 @@
-import { Posts } from "./posts";
+import { Post } from "./post";
 
 //Model for post/profile comments
 export interface Comment {
@@ -9,7 +9,7 @@ export interface Comment {
   //user's date of birth
   createdAt: Date;
   //post belonging to comment
-  post: Posts;
+  post: Post;
   //postID to identify Post
   postID: number;
 }

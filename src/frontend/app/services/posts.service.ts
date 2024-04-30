@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Posts } from '../../../models/posts';
+import { Post } from '../../../models/post';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,12 +10,12 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  createPost(post: Posts): Observable<Posts> {
-    return this.http.post<Posts>('/api/posts/create', post)
+  createPost(post: Post): Observable<Post> {
+    return this.http.post<Post>('/api/posts/create', post)
   }
 
-  getAllPosts(): Observable<Posts[]> {
-    return this.http.get<Posts[]>('/api/posts/');
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('/api/posts/');
   }
 
 }

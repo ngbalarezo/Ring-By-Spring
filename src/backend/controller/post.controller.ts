@@ -1,5 +1,5 @@
 import { Elysia, Context, t } from "elysia";
-import { Posts } from "../../models/posts";
+import { Post } from "../../models/post";
 import { createPost, listPosts } from "../biz/posts.biz";
 
 
@@ -19,10 +19,10 @@ export function configurePostsRoutes(app: Elysia) {
     .get("/", list)
   
   }
-async function create(ctxt: Context): Promise<Posts> {
-    return createPost(ctxt.body as Posts);
+async function create(ctxt: Context): Promise<Post> {
+    return createPost(ctxt.body as Post);
   }
   
-  async function list(): Promise<Posts[]> {
+  async function list(): Promise<Post[]> {
     return listPosts("");
   }
