@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Posts } from '../../../models/posts';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
-
-  private posts: Posts[] = [];
 
   constructor(private http: HttpClient) {}
 
