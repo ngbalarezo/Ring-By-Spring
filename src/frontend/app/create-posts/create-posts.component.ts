@@ -21,14 +21,21 @@ export class CreatePostsComponent {
   }
   createPost(): void {
     // get current date and time
-    const timeOfPost = new Date().toISOString(); //gets current date and time for new posts
-    
+    const currentTime = new Date();
+    const options: Intl.DateTimeFormatOptions = {
+      hour: 'numeric',
+      minute: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    };
+    const formattedTimeOfPost = currentTime.toLocaleTimeString('en-US', options) + ' ' + currentTime.toLocaleDateString('en-US', options);    
     // create new post object
     const newPost: Post = {
-        postID: '#username.date', //in order for post id to be unique - userid is already unique and date is basically unique, simple way of making it unique
+        postID: '#username.' + currentTime, //in order for post id to be unique - userid is already unique and date is basically unique, simple way of making it unique
         userID: 'username',
         content: this.formData.content,
-        timeOfPost,
+        timeOfPost: formattedTimeOfPost,
         ...(this.formData.image && { image: this.formData.image })    
       };
 
@@ -39,7 +46,7 @@ export class CreatePostsComponent {
       });
     } catch (error) {
       console.error('Error occurred while creating post:', error);
-      };
+      }
 
   }
 

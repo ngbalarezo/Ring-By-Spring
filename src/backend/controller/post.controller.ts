@@ -9,9 +9,7 @@ export function configurePostsRoutes(app: Elysia) {
       postID: t.String(),
       userID: t.String(),
       content: t.String(),
-      timeOfPost: t.String({
-        format: 'date',
-      }),
+      timeOfPost: t.String(),
     })})
     .post("create", create, {body: 'post'})
     .get("/", list)
