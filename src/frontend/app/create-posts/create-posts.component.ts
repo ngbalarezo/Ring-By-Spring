@@ -29,7 +29,7 @@ export class CreatePostsComponent {
       day: 'numeric',
       year: 'numeric'
     };
-    const formattedTimeOfPost = currentTime.toLocaleTimeString('en-US', options) + ' ' + currentTime.toLocaleDateString('en-US', options);    
+    const formattedTimeOfPost = currentTime.toLocaleString('en-US', options);
     // create new post object
     const newPost: Post = {
         postID: '#username.' + currentTime, //in order for post id to be unique - userid is already unique and date is basically unique, simple way of making it unique
