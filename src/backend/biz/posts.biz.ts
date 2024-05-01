@@ -20,7 +20,7 @@ export async function listPosts(): Promise<Posts[]> {
 function convertPosts(fromDb: Post): Posts{
   const post: Posts = {
     postID: fromDb.postID,
-    userid: fromDb.userid,
+    userID: fromDb.userID,
     content: fromDb.content,
     timeOfPost: fromDb.timeOfPost
   }

@@ -26,7 +26,7 @@ export class CreatePostsComponent {
     // create new post object
     const newPost: Post = {
         postID: '#username.date', //in order for post id to be unique - userid is already unique and date is basically unique, simple way of making it unique
-        userid: 'username',
+        userID: 'username',
         content: this.formData.content,
         timeOfPost,
         image: this.formData.image

@@ -26,7 +26,7 @@ export class ListPostComponent implements OnInit {
         postID: '1', 
         content: 'Dummy content 1', 
         timeOfPost: '1999', 
-        userid: 'user1' 
+        userID: 'user1' 
       };
       this.posts.push(newPost);
     }
