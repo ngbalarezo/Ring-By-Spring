@@ -29,14 +29,18 @@ export class CreatePostsComponent {
         userID: 'username',
         content: this.formData.content,
         timeOfPost,
-        image: this.formData.image
-    };
+        ...(this.formData.image && { image: this.formData.image })    
+      };
 
-    this.postService.createPost(newPost);
-    console.log('Saved ',newPost,', returning home.');
-    this.router.navigate(['/']);
-}
+    try {
+      this.postService.createPost(newPost).subscribe(post => {
+        console.log('Saved ',post,', returning home.');
+        this.router.navigate(['/']);
+      });
+    } catch (error) {
+      console.error('Error occurred while creating post:', error);
+      };
 
-
+  }
 
 }
