@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../services/posts.service';
-import { Posts } from '../../../models/posts';
+import { Post } from '../../../models/post';
 import { NgFor } from '@angular/common';
 
 
@@ -15,18 +15,18 @@ export class ListPostComponent implements OnInit {
   
   constructor(private postsService: PostsService) {}
   
-  posts: Posts[] = []
+  posts: Post[] = []
 
   ngOnInit() {
     this.postsService.getAllPosts().subscribe(posts => {
       this.posts = posts;
       if (!posts || posts.length === 0) {
-        const newPost: Posts = 
+        const newPost: Post = 
       { 
         postID: '1', 
         content: 'Dummy content 1', 
         timeOfPost: '1999', 
-        userid: 'user1' 
+        userID: 'user1' 
       };
       this.posts.push(newPost);
     }

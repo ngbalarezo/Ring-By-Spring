@@ -1,23 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Posts } from '../../../models/posts';
-import { Observable, of } from 'rxjs';
+import { Post } from '../../../models/post';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
 
-  private posts: Posts[] = [];
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
-
-  createPost(post: Posts): void {
-    this.posts.push(post);
-    console.log(post)
+  createPost(post: Post): Observable<Post> {
+    return this.http.post<Post>('/api/posts/create', post)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          // Handle error
+          console.error('An error occurred while creating post:', error);
+          return throwError('Failed to create post.');
+        })
+      );
   }
 
-  getAllPosts(): Observable<Posts[]> {
-    return of(this.posts);
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('/api/posts/')
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          // Handle error
+          console.error('An error occurred while fetching posts:', error);
+          return throwError('Failed to fetch posts.');
+        })
+      );
   }
-
 }

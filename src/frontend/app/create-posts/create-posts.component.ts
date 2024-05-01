@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../services/posts.service';
-import { Posts } from '../../../models/posts';
+import { Post } from '../../../models/post';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -21,22 +21,33 @@ export class CreatePostsComponent {
   }
   createPost(): void {
     // get current date and time
-    const timeOfPost = new Date().toISOString(); //gets current date and time for new posts
-    
-    // create new post object
-    const newPost: Posts = {
-        postID: '#username.date', //in order for post id to be unique - userid is already unique and date is basically unique, simple way of making it unique
-        userid: 'username',
-        content: this.formData.content,
-        timeOfPost,
-        image: this.formData.image
+    const currentTime = new Date();
+    const options: Intl.DateTimeFormatOptions = {
+      hour: 'numeric',
+      minute: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
     };
+    const formattedTimeOfPost = currentTime.toLocaleString('en-US', options);
+    // create new post object
+    const newPost: Post = {
+        postID: '#username.' + currentTime, //in order for post id to be unique - userid is already unique and date is basically unique, simple way of making it unique
+        userID: 'username',
+        content: this.formData.content,
+        timeOfPost: formattedTimeOfPost,
+        ...(this.formData.image && { image: this.formData.image })    
+      };
 
-    this.postService.createPost(newPost);
-    console.log('Saved ',newPost,', returning home.');
-    this.router.navigate(['/']);
-}
+    try {
+      this.postService.createPost(newPost).subscribe(post => {
+        console.log('Saved ',post,', returning home.');
+        this.router.navigate(['/']);
+      });
+    } catch (error) {
+      console.error('Error occurred while creating post:', error);
+      }
 
-
+  }
 
 }

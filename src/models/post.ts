@@ -3,12 +3,12 @@
 /*
 Model for posts
 */
-export interface Posts {
+export interface Post {
     //postID to identify unique posts
     postID: string, 
     //user represents the id of the user who posted the post
     //!FIXME: below must be inserted in service/component!
-    userid: string,
+    userID: string,
     //content is the text of the post
     content: string,
     //timeOfPost says when the post was made

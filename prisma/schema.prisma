@@ -38,7 +38,7 @@ model Comments {
 
 model Posts {
   postID  String @id
-  userid  String
+  userID  String
   content  String
   timeOfPost String
   //image String need to figure out how to implement this
